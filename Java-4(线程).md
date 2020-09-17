@@ -114,8 +114,8 @@ AtomicMarkableReference 是否改变,AtomicStampedReference改变过几次
 
 ##### 关闭线程池
 
-1. shutdown 关闭正在队列中，没有执行的线程
-2. shutdownNow 同时中断正在执行中的线程，不一定成功，仅仅发出一个 interrupt 信号，自己处理中断
+1. shutdown 仅仅关闭线程池，不中断正在执行的线程，也不移除BlockingQueue队列
+2. shutdownNow 关闭线程池，移除BlockingQueue队列中的数据，同时中断正在执行中的线程，不一定成功，仅仅发出一个 interrupt 信号，自己处理中断
 
 ##### 创建线程池的特性
 
