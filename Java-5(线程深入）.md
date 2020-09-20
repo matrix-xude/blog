@@ -54,21 +54,28 @@ Java Memory Model
 #### synchronized
 
 1. 使用monitorenter和monitorexit来实现
+2. monitorenter指令是在编译后插入到同步代码块的开始位置，而monitorexit是插入到方法结束处和异常处
+3. 每个monitorenter必须有对应的monitorexit与之配对 
+4. 任何对象都有一个monitor与之关联
 
-TODO
+![](http://m.qpic.cn/psc?/V13IATxj2uFujC/bqQfVz5yrrGYSXMvKr.cqYypBcO.5GenlEZzCd5mEHgIuYNNA0lDo3MFGVzA4AeUbMmRHcmmc7K0sIaNxYrIL6KXXJF8oOA6ch37Hw7hs0E!/b&bo=9wJ2AAAAAAADB6E!&rf=viewer_4)
+
+![](http://m.qpic.cn/psc?/V13IATxj2uFujC/bqQfVz5yrrGYSXMvKr.cqeUIrS8gOJB.ov3xYx6q2bPMJavYK3s8oxGDo8zngSAdwdmCnsu30WvsaIVkQ.LNTxLcPM5907fb.mh9zdifPOE!/b&bo=RwIBAQAAAAADB2c!&rf=viewer_4)
 
 
 
-#### 锁的类型
+#### synchronized锁的类型
 
 1. 无锁状态
-2. 偏向锁 拿到锁的线程大概率是第一个拿到锁的线程，只判断锁是否当前拿到线程（被撤销需要其他线程的来修改）
-3. 轻量级锁 CAS
-4. 重量级锁
+2. 偏向锁 ：大多数情况下，锁不仅不存在多线程竞争，而且总是由同一线程多次获得，为了让线程获得锁的代价更低而引入了偏向锁。无竞争时不需要进行CAS操作来加锁和解锁。 
+3. 轻量级锁：通过CAS操作来加锁和解锁。
+4. 重量级锁：阻塞线程
+
+![](http://m.qpic.cn/psc?/V13IATxj2uFujC/bqQfVz5yrrGYSXMvKr.cqSrnB2rISCsaLiJaKgZLOcMqhWopMzpyKLf8s*EYSZigGPanzzU*j0bKN5d0bkfQCiMfM8Pq1bbhF069F3KiEzQ!/b&bo=cAKGAQAAAAADB9c!&rf=viewer_4)
 
 
 
-优化：
+synchronized做了哪些优化？
 
 以上4点逐步升级，还有**锁消除、锁粗化、逃逸分析**
 
