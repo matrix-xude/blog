@@ -41,3 +41,12 @@ date: 2020-09-20 20:15:39
 
 
 
+
+#### Externalizable
+
+```java
+void writeExternal(ObjectOutput out) throws IOException;
+void readExternal(ObjectInput in) throws IOException, ClassNotFoundException;
+```
+
+通过覆写上面2个方法自己决定需要序列化哪些对象
